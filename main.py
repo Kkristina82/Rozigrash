@@ -7,7 +7,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQu
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 
-BOT_TOKEN = "ВСТАВТЕ_НОВИЙ_ТОКЕН_БОТА"
+BOT_TOKEN = "8650205673:AAFHrBrUaisrXuqwU9Ww60o54zWOkp2POyk"
 DATA_FILE = "participants.xlsx"
 
 logging.basicConfig(level=logging.INFO)
