@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Новини та акції — RK Perfume</title>
+  <meta name="description" content="Останні новини, акції та публікації RK Perfume. Слідкуйте за нашими соцмережами." />
+  <meta property="og:title" content="Новини — RK Perfume" />
+  <meta property="og:image" content="https://rk-perfume.com/images/og-cover.jpg" />
+  <link rel="icon" type="image/png" href="../images/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    .news-hero-banner {
+      background: var(--dark-2);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+    .news-hero-banner h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .news-hero-banner p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .social-subscribe {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .sub-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid var(--border-light);
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+    .sub-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .news-filter-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .news-tab {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: var(--font-body);
+      margin-bottom: -1px;
+    }
+    .news-tab.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <a href="../index.html">
+        <span class="logo-rk">RK</span><span class="logo-perfume">PERFUME</span>
+      </a>
+    </div>
+    <button class="nav__burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="../index.html">Головна</a></li>
+      <li><a href="catalog.html">Каталог</a></li>
+      <li><a href="pricelist.html">Прайс-лист</a></li>
+      <li><a href="order.html">Замовити</a></li>
+      <li><a href="news.html" class="active">Новини</a></li>
+      <li><a href="contacts.html">Контакти</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-hero">
+    <span class="page-hero__label">RK Perfume</span>
+    <h1>Новини<br /><em style="font-style:italic;color:var(--gold-pale)">та акції</em></h1>
+    <p>Слідкуйте за нашими публікаціями та ексклюзивними пропозиціями</p>
+  </section>
+
+  <section class="news-section">
+    <div class="container">
+
+      <!-- Subscribe Banner -->
+      <div class="news-hero-banner">
+        <div>
+          <p style="font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Підписуйтесь на нас</p>
+          <h3>Першими дізнавайтесь про нові аромати та акції</h3>
+          <p>Публікуємо щодня: огляди, унбоксінги, знижки та ексклюзивні пропозиції</p>
+        </div>
+        <div class="social-subscribe">
+          <a href="http://t.me/rkperfume" target="_blank" class="sub-btn">✈ Telegram</a>
+          <a href="https://www.instagram.com/rk.perfume.krop" target="_blank" class="sub-btn">◎ Instagram</a>
+          <a href="https://www.tiktok.com/@rk.perfume.krop" target="_blank" class="sub-btn">♪ TikTok</a>
+          <a href="https://www.threads.com/@rk.perfume.krop" target="_blank" class="sub-btn">@ Threads</a>
+          <a href="https://www.facebook.com/people/Rkperfume-Krop/61577462221644/" target="_blank" class="sub-btn">f Facebook</a>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="news-filter-tabs">
+        <button class="news-tab active" data-tab="all">Всі публікації</button>
+        <button class="news-tab" data-tab="promo">Акції</button>
+        <button class="news-tab" data-tab="new">Новинки</button>
+        <button class="news-tab" data-tab="review">Огляди</button>
+        <button class="news-tab" data-tab="info">Інформація</button>
+      </div>
+
+      <!-- News Grid -->
+      <div class="news-grid" id="newsGrid"></div>
+
+    </div>
+  </section>
+
+  <section style="padding:4rem 0;background:var(--dark-2);border-top:1px solid var(--border-light);margin-top:2rem;">
+    <div class="container" style="text-align:center;">
+      <p class="section-label">Слідкуйте в прямому ефірі</p>
+      <h2 class="section-title" style="margin-bottom:1rem;">Ми у соціальних мережах</h2>
+      <p style="font-size:0.82rem;color:var(--text-muted);max-width:450px;margin:0 auto 2.5rem;">
+        Щоденні публікації, огляди ароматів, розпаковки та ексклюзивні акції тільки для підписників
+      </p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="http://t.me/rkperfume" target="_blank" class="btn btn--outline">✈ Telegram канал</a>
+        <a href="https://www.instagram.com/rk.perfume.krop" target="_blank" class="btn btn--ghost">◎ Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo"><span class="logo-rk">RK</span><span class="logo-perfume">PERFUME</span></div>
+          <p>Якісна парфумерія<br />у Кропивницькому</p>
+        </div>
+        <div class="footer__nav">
+          <h4>Навігація</h4>
+          <ul>
+            <li><a href="../index.html">Головна</a></li>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="pricelist.html">Прайс-лист</a></li>
+            <li><a href="order.html">Замовити</a></li>
+          </ul>
+        </div>
+        <div class="footer__social">
+          <h4>Соцмережі</h4>
+          <div class="footer__social-links">
+            <a href="http://t.me/rkperfume" target="_blank">✈</a>
+            <a href="https://www.instagram.com/rk.perfume.krop" target="_blank">◎</a>
+            <a href="https://www.tiktok.com/@rk.perfume.krop" target="_blank">♪</a>
+            <a href="https://www.facebook.com/people/Rkperfume-Krop/61577462221644/" target="_blank">f</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 RK Perfume. Всі права захищені.</p>
+        <p>Кропивницький, Україна</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // News data (manually curated — update as needed)
+    const NEWS = [
+      {
+        id: 1, tab: 'promo', source: 'tg', date: '27 квітня 2025',
+        title: '🔥 Акція: -15% на всі жіночі аромати',
+        text: 'Тільки цього тижня — знижка 15% на всі жіночі аромати з нашого каталогу. Встигніть замовити до кінця тижня!',
+        tags: ['Акція', 'Знижка', 'Жіночі'],
+        link: 'http://t.me/rkperfume'
+      },
+      {
+        id: 2, tab: 'new', source: 'ig', date: '25 квітня 2025',
+        title: '✨ Нові надходження: Byredo та Le Labo',
+        text: 'Поповнили запаси! Byredo Gypsy Water та Le Labo Santal 33 — культові нішеві аромати тепер доступні у нас.',
+        tags: ['Новинка', 'Нішева', 'Byredo'],
+        link: 'https://www.instagram.com/rk.perfume.krop'
+      },
+      {
+        id: 3, tab: 'review', source: 'tg', date: '22 квітня 2025',
+        title: '📖 Огляд: Dior Sauvage — чому він №1 у світі?',
+        text: 'Розповідаємо чому Dior Sauvage вже роками залишається найпопулярнішим чоловічим ароматом планети.',
+        tags: ['Огляд', 'Dior', 'Чоловічі'],
+        link: 'http://t.me/rkperfume'
+      },
+      {
+        id: 4, tab: 'info', source: 'fb', date: '20 квітня 2025',
+        title: 'ℹ️ Як зберігати парфуми правильно?',
+        text: 'Ділимось корисними порадами: як правильно зберігати парфуми, щоб вони зберігали свій аромат якомога довше.',
+        tags: ['Поради', 'Корисно'],
+        link: 'https://www.facebook.com/people/Rkperfume-Krop/61577462221644/'
+      },
+      {
+        id: 5, tab: 'review', source: 'ig', date: '18 квітня 2025',
+        title: '🌸 ТОП-5 весняних ароматів 2025',
+        text: 'Зібрали найкращі весняні аромати сезону: свіжі, квіткові, легкі — ідеально для теплих днів.',
+        tags: ['ТОП', 'Весна', 'Огляд'],
+        link: 'https://www.instagram.com/rk.perfume.krop'
+      },
+      {
+        id: 6, tab: 'promo', source: 'tg', date: '15 квітня 2025',
+        title: '🎁 Безкоштовна доставка від 2000 грн',
+        text: 'Замовляйте на суму від 2000 грн та отримуйте безкоштовну доставку Новою Поштою по всій Україні!',
+        tags: ['Акція', 'Доставка'],
+        link: 'http://t.me/rkperfume'
+      },
+      {
+        id: 7, tab: 'new', source: 'ig', date: '12 квітня 2025',
+        title: '💎 Creed Aventus — легенда у наявності',
+        text: 'Довгоочікуване поповнення! Creed Aventus — ікона чоловічої парфумерії тепер є у нашому магазині.',
+        tags: ['Новинка', 'Creed', 'Нішева'],
+        link: 'https://www.instagram.com/rk.perfume.krop'
+      },
+      {
+        id: 8, tab: 'info', source: 'tg', date: '10 квітня 2025',
+        title: '📦 Оновлений графік доставки',
+        text: 'Тепер відправляємо замовлення щодня (крім неділі). Замовлення до 15:00 — відправка того ж дня!',
+        tags: ['Доставка', 'Графік'],
+        link: 'http://t.me/rkperfume'
+      },
+      {
+        id: 9, tab: 'review', source: 'tg', date: '8 квітня 2025',
+        title: '👁️ Розпаковка: Tom Ford Oud Wood',
+        text: 'Унбоксінг Tom Ford Oud Wood — шикарний деревний аромат у характерному флаконі. Наші враження та нотатки.',
+        tags: ['Огляд', 'Tom Ford', 'Унбоксінг'],
+        link: 'http://t.me/rkperfume'
+      },
+    ];
+
+    const sourceConfig = {
+      tg: { label: 'Telegram', cls: 'tg', icon: '✈' },
+      ig: { label: 'Instagram', cls: 'ig', icon: '◎' },
+      fb: { label: 'Facebook', cls: 'fb', icon: 'f' },
+    };
+
+    function renderNews(filter = 'all') {
+      const grid = document.getElementById('newsGrid');
+      const filtered = filter === 'all' ? NEWS : NEWS.filter(n => n.tab === filter);
+      grid.innerHTML = filtered.map(n => {
+        const src = sourceConfig[n.source];
+        return `
+          <div class="news-card">
+            <div class="news-card__source">
+              <div class="news-card__source-icon news-card__source-icon--${src.cls}">${src.icon}</div>
+              <span class="news-card__source-name">${src.label}</span>
+              <span class="news-card__date">${n.date}</span>
+            </div>
+            <h3 class="news-card__title">${n.title}</h3>
+            <p class="news-card__text">${n.text}</p>
+            <div class="news-card__tags">${n.tags.map(t => `<span class="news-card__tag">${t}</span>`).join('')}</div>
+            <a href="${n.link}" target="_blank" class="news-card__link">Читати далі →</a>
+          </div>
+        `;
+      }).join('');
+
+      // Animate
+      document.querySelectorAll('.news-card').forEach((el, i) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(15px)';
+        el.style.transition = `opacity 0.4s ${i * 0.05}s ease, transform 0.4s ${i * 0.05}s ease`;
+        requestAnimationFrame(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
+      });
+    }
+
+    // Tabs
+    document.querySelectorAll('.news-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.news-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        renderNews(this.dataset.tab);
+      });
+    });
+
+    renderNews();
+  </script>
+</body>
+</html>
