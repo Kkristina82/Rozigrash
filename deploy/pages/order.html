@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Замовити парфуми — RK Perfume | Кропивницький</title>
+  <meta name="description" content="Замовте парфуми онлайн від RK Perfume. Швидка доставка по Україні Новою Поштою." />
+  <meta property="og:title" content="Замовити парфуми — RK Perfume" />
+  <meta property="og:image" content="https://rk-perfume.com/images/og-cover.jpg" />
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <a href="../index.html">
+        <span class="logo-rk">RK</span><span class="logo-perfume">PERFUME</span>
+      </a>
+    </div>
+    <button class="nav__burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="../index.html">Головна</a></li>
+      <li><a href="catalog.html">Каталог</a></li>
+      <li><a href="pricelist.html">Прайс-лист</a></li>
+      <li><a href="order.html" class="active">Замовити</a></li>
+      <li><a href="news.html">Новини</a></li>
+      <li><a href="contacts.html">Контакти</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-hero">
+    <span class="page-hero__label">RK Perfume</span>
+    <h1>Оформити<br /><em style="font-style:italic;color:var(--gold-pale)">замовлення</em></h1>
+    <p>Заповніть форму та ми зв'яжемось з вами протягом години</p>
+  </section>
+
+  <section class="order-section">
+    <div class="container">
+      <div class="order-grid">
+
+        <!-- FORM -->
+        <div>
+          <div class="section-header" style="text-align:left;margin-bottom:2rem;">
+            <span class="section-label">Ваші дані</span>
+            <h2 class="section-title" style="font-size:2rem;">Форма замовлення</h2>
+          </div>
+
+          <div class="order-form" id="orderForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Ваше ім'я *</label>
+                <input type="text" id="name" placeholder="Ім'я та прізвище" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Телефон *</label>
+                <input type="tel" id="phone" placeholder="+38 (0__) ___-__-__" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="product">Аромат / Продукт *</label>
+              <select id="product" required>
+                <option value="">— Оберіть аромат —</option>
+                <optgroup label="🌸 Жіночі">
+                </optgroup>
+                <optgroup label="👔 Чоловічі">
+                </optgroup>
+                <optgroup label="✨ Унісекс">
+                </optgroup>
+                <optgroup label="💎 Нішева парфумерія">
+                </optgroup>
+                <option value="custom">Інший (вкажіть у коментарі)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="delivery">Спосіб отримання *</label>
+              <select id="delivery" required>
+                <option value="">— Оберіть спосіб —</option>
+                <option value="nova_poshta">Нова Пошта (по Україні)</option>
+                <option value="pickup">Самовивіз (Кропивницький)</option>
+                <option value="courier">Кур'єр (Кропивницький)</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="cityGroup" style="display:none;">
+              <label for="city">Місто та відділення НП</label>
+              <input type="text" id="city" placeholder="Наприклад: Київ, відд. 15" />
+            </div>
+
+            <div class="form-group">
+              <label for="comment">Коментар</label>
+              <textarea id="comment" placeholder="Додаткові побажання, питання або уточнення..."></textarea>
+            </div>
+
+            <div class="form-group" style="flex-direction:row;align-items:flex-start;gap:0.75rem;">
+              <input type="checkbox" id="agree" style="width:16px;height:16px;margin-top:3px;accent-color:var(--gold);flex-shrink:0;" />
+              <label for="agree" style="font-size:0.72rem;color:var(--text-muted);text-transform:none;letter-spacing:0;cursor:pointer;">
+                Я погоджуюсь на обробку персональних даних та хочу отримувати новини про акції від RK Perfume
+              </label>
+            </div>
+
+            <button class="btn btn--primary" id="submitBtn" onclick="submitOrder()" style="align-self:flex-start;margin-top:0.5rem;">
+              Надіслати замовлення →
+            </button>
+
+            <p style="font-size:0.68rem;color:var(--text-dim);line-height:1.6;">
+              * Після відправки форми ми зв'яжемось з вами для підтвердження замовлення та оплати
+            </p>
+          </div>
+
+          <!-- Success Message (hidden) -->
+          <div id="successMsg" style="display:none;padding:3rem;border:1px solid var(--border);text-align:center;">
+            <div style="font-size:2rem;color:var(--gold);margin-bottom:1rem;">✦</div>
+            <h3 style="font-family:var(--font-display);font-size:1.8rem;font-weight:400;color:var(--cream);margin-bottom:0.75rem;">
+              Дякуємо за замовлення!
+            </h3>
+            <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.5rem;">
+              Ми отримали ваше замовлення та зв'яжемось з вами протягом години у робочий час.
+            </p>
+            <a href="catalog.html" class="btn btn--outline">Продовжити перегляд каталогу</a>
+          </div>
+        </div>
+
+        <!-- INFO -->
+        <div class="order-info">
+          <h3>Як це працює</h3>
+
+          <div class="order-info-item">
+            <span class="order-info-item__icon">①</span>
+            <div>
+              <div class="order-info-item__title">Заповніть форму</div>
+              <div class="order-info-item__text">Вкажіть ваші контакти та бажаний аромат</div>
+            </div>
+          </div>
+          <div class="order-info-item">
+            <span class="order-info-item__icon">②</span>
+            <div>
+              <div class="order-info-item__title">Ми зв'яжемось з вами</div>
+              <div class="order-info-item__text">Підтвердимо наявність та уточнимо деталі доставки</div>
+            </div>
+          </div>
+          <div class="order-info-item">
+            <span class="order-info-item__icon">③</span>
+            <div>
+              <div class="order-info-item__title">Оплата</div>
+              <div class="order-info-item__text">Оплата на карту або накладеним платежем</div>
+            </div>
+          </div>
+          <div class="order-info-item">
+            <span class="order-info-item__icon">④</span>
+            <div>
+              <div class="order-info-item__title">Отримання</div>
+              <div class="order-info-item__text">Відправка Новою Поштою або самовивіз у Кропивницькому</div>
+            </div>
+          </div>
+
+          <div style="margin-top:2.5rem;padding:1.5rem;border:1px solid var(--border);background:rgba(201,168,76,0.03);">
+            <p style="font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Також можна написати нам:</p>
+            <div style="display:flex;flex-direction:column;gap:0.6rem;">
+              <a href="http://t.me/rkperfum" target="_blank" style="font-size:0.82rem;color:var(--cream);display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid var(--border-light);">
+                <span style="color:#2AABEE;">✈</span> Написати нам: @rkperfum
+              </a>
+              <a href="http://t.me/rkperfume" target="_blank" style="font-size:0.82rem;color:var(--cream);display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid var(--border-light);">
+                <span style="color:#2AABEE;">✈</span> Telegram канал: @rkperfume
+              </a>
+              <a href="https://www.instagram.com/rk.perfume.krop" target="_blank" style="font-size:0.82rem;color:var(--cream);display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid var(--border-light);">
+                <span style="color:#E1306C;">◎</span> Instagram: @rk.perfume.krop
+              </a>
+              <a href="https://www.facebook.com/people/Rkperfume-Krop/61577462221644/" target="_blank" style="font-size:0.82rem;color:var(--cream);display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0;">
+                <span style="color:#1877F2;">f</span> Facebook: Rkperfume Krop
+              </a>
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem;padding:1.5rem;border:1px solid var(--border);">
+            <p style="font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.5rem;">Графік роботи</p>
+            <p style="font-size:0.82rem;color:var(--cream);">Пн – Сб: 9:00 – 20:00</p>
+            <p style="font-size:0.82rem;color:var(--text-muted);">Нд: 10:00 – 18:00</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo"><span class="logo-rk">RK</span><span class="logo-perfume">PERFUME</span></div>
+          <p>Якісна парфумерія<br />у Кропивницькому</p>
+        </div>
+        <div class="footer__nav">
+          <h4>Навігація</h4>
+          <ul>
+            <li><a href="../index.html">Головна</a></li>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="pricelist.html">Прайс-лист</a></li>
+            <li><a href="order.html">Замовити</a></li>
+          </ul>
+        </div>
+        <div class="footer__social">
+          <h4>Соцмережі</h4>
+          <div class="footer__social-links">
+            <a href="http://t.me/rkperfume" target="_blank">✈</a>
+            <a href="https://www.instagram.com/rk.perfume.krop" target="_blank">◎</a>
+            <a href="https://www.tiktok.com/@rk.perfume.krop" target="_blank">♪</a>
+            <a href="https://www.facebook.com/people/Rkperfume-Krop/61577462221644/" target="_blank">f</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 RK Perfume. Всі права захищені.</p>
+        <p>Кропивницький, Україна</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // Populate select options
+    const select = document.getElementById('product');
+    const groups = select.querySelectorAll('optgroup');
+    const catMap = { women: 0, men: 1, unisex: 2, niche: 3 };
+
+    PRODUCTS.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p.name + ' — ' + p.brand;
+      opt.textContent = p.name + ' — ' + p.brand + ' (' + formatPrice(p.price) + ')';
+      const groupIdx = catMap[p.category];
+      if (groupIdx !== undefined) groups[groupIdx].appendChild(opt);
+    });
+
+    // Pre-fill from URL param
+    const urlParams = new URLSearchParams(window.location.search);
+    const preProduct = urlParams.get('product');
+    if (preProduct) {
+      for (let opt of select.options) {
+        if (opt.value.toLowerCase().includes(preProduct.toLowerCase())) {
+          opt.selected = true;
+          break;
+        }
+      }
+    }
+
+    // Show city field for Nova Poshta
+    document.getElementById('delivery').addEventListener('change', function() {
+      document.getElementById('cityGroup').style.display = this.value === 'nova_poshta' ? 'flex' : 'none';
+    });
+
+    // Submit
+    function submitOrder() {
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const product = document.getElementById('product').value;
+      const agree = document.getElementById('agree').checked;
+
+      if (!name || !phone || !product) {
+        showToast('Увага', 'Будь ласка, заповніть всі обов\'язкові поля');
+        return;
+      }
+
+      // In production: send to backend or Telegram bot
+      // For now: simulate success
+      document.getElementById('orderForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+
+      // Telegram link fallback
+      const msg = `🌹 Нове замовлення RK Perfume!\n👤 ${name}\n📞 ${phone}\n🧴 ${product}`;
+      console.log('Order:', msg);
+    }
+
+    function showToast(title, message) {
+      let toast = document.querySelector('.toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.className = 'toast';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<strong>${title}</strong>${message}`;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Cloudflare Pages — RK Perfume _redirects
+# Формат: FROM  TO  STATUS
+
+/home            /                        301
+/catalog         /pages/catalog.html      301
+/price           /pages/pricelist.html    301
+/order           /pages/order.html        301
+/news            /pages/news.html         301
+/contacts        /pages/contacts.html     301
+/admin           /admin/index.html        301
