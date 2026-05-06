@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Кошик та замовлення — RK Perfume</title>
+  <meta name="description" content="Оформіть замовлення парфумів RK Perfume. Швидка доставка по Україні Новою Поштою." />
+  <meta property="og:title" content="Замовити парфуми — RK Perfume" />
+  <meta property="og:image" content="https://rk-perfume.com/images/og-cover.jpg" />
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    /* ---- CART PAGE STYLES ---- */
+    .order-page { padding: 6rem 0 5rem; }
+    .order-page .container { max-width: 1100px; }
+
+    /* Steps */
+    .checkout-steps {
+      display: flex; align-items: center; gap: 0; margin-bottom: 3.5rem;
+      border: 1px solid var(--border); padding: 1.25rem 2rem;
+      background: rgba(201,168,76,0.02);
+    }
+    .step {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--text-dim); flex: 1; position: relative;
+    }
+    .step.active { color: var(--gold); }
+    .step.done { color: var(--text-muted); }
+    .step__num {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; flex-shrink: 0;
+    }
+    .step.active .step__num { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
+    .step.done .step__num { border-color: var(--text-muted); background: rgba(255,255,255,0.03); }
+    .step__sep {
+      flex: none; width: 40px; height: 1px; background: var(--border);
+      margin: 0 0.5rem;
+    }
+
+    /* Layout */
+    .order-layout { display: grid; grid-template-columns: 1fr 380px; gap: 2.5rem; align-items: start; }
+    @media (max-width: 860px) { .order-layout { grid-template-columns: 1fr; } }
+
+    /* === STEP 1: CART === */
+    #stepCart { display: block; }
+    #stepForm { display: none; }
+    #stepSuccess { display: none; }
+
+    .cart-empty {
+      text-align: center; padding: 5rem 2rem;
+      border: 1px solid var(--border);
+    }
+    .cart-empty__icon { font-size: 2.5rem; color: var(--border); margin-bottom: 1.5rem; }
+    .cart-empty h3 {
+      font-family: var(--font-display); font-weight: 400; font-size: 1.8rem;
+      color: var(--cream); margin-bottom: 0.75rem;
+    }
+    .cart-empty p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2rem; }
+
+    /* Cart items */
+    .cart-items { display: flex; flex-direction: column; gap: 1px; margin-bottom: 1.5rem; }
+    .cart-item {
+      display: grid; grid-template-columns: 1fr auto auto;
+      align-items: center; gap: 1.5rem;
+      padding: 1.5rem; border: 1px solid var(--border);
+      background: rgba(255,255,255,0.01);
+      transition: background 0.2s;
+    }
+    .cart-item:hover { background: rgba(201,168,76,0.02); }
+    .cart-item__info {}
+    .cart-item__brand {
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.3rem;
+    }
+    .cart-item__name {
+      font-family: var(--font-display); font-size: 1.15rem; font-weight: 400;
+      color: var(--cream); margin-bottom: 0.2rem;
+    }
+    .cart-item__volume { font-size: 0.72rem; color: var(--text-dim); }
+    .cart-item__qty {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .qty-btn {
+      width: 28px; height: 28px; border: 1px solid var(--border);
+      background: none; color: var(--cream); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: border-color 0.2s, color 0.2s;
+    }
+    .qty-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .qty-val {
+      font-size: 0.9rem; min-width: 24px; text-align: center; color: var(--cream);
+    }
+    .cart-item__price {
+      text-align: right; min-width: 90px;
+    }
+    .cart-item__price-val {
+      font-size: 1rem; color: var(--cream); font-weight: 400;
+    }
+    .cart-item__remove {
+      display: block; font-size: 0.65rem; letter-spacing: 0.1em;
+      color: var(--text-dim); cursor: pointer; margin-top: 0.4rem;
+      text-transform: uppercase; background: none; border: none;
+      text-align: right; transition: color 0.2s; padding: 0;
+    }
+    .cart-item__remove:hover { color: #c0392b; }
+
+    /* Cart summary */
+    .cart-summary {
+      border: 1px solid var(--border); padding: 2rem;
+      background: rgba(201,168,76,0.02);
+    }
+    .cart-summary__title {
+      font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: 1.5rem;
+    }
+    .cart-summary__row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.75rem;
+    }
+    .cart-summary__row--total {
+      font-size: 1.1rem; color: var(--cream); margin-top: 1.25rem;
+      padding-top: 1.25rem; border-top: 1px solid var(--border);
+    }
+    .cart-summary__row--total .val { color: var(--gold); }
+    .cart-summary__note {
+      font-size: 0.68rem; color: var(--text-dim); margin: 1.5rem 0;
+      line-height: 1.7;
+    }
+
+    /* === STEP 2: FORM === */
+    .form-section-title {
+      font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 2rem; padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .order-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label {
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--dark-2); border: 1px solid var(--border-light);
+      color: var(--cream); padding: 0.75rem 1rem;
+      font-family: var(--font-body); font-size: 0.85rem; font-weight: 300;
+      outline: none; transition: border-color 0.3s; width: 100%;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group select option { background: #1a1814; }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    /* Order summary sidebar */
+    .order-aside {
+      border: 1px solid var(--border); padding: 2rem;
+      background: rgba(201,168,76,0.02); position: sticky; top: 100px;
+    }
+    .order-aside__title {
+      font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: 1.5rem;
+    }
+    .aside-item {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-size: 0.78rem; color: var(--text-muted);
+      padding: 0.5rem 0; border-bottom: 1px solid var(--border-light);
+    }
+    .aside-item:last-of-type { border-bottom: none; }
+    .aside-item__name { flex: 1; padding-right: 1rem; }
+    .aside-item__qty { color: var(--text-dim); padding-right: 0.75rem; }
+    .aside-item__price { color: var(--cream); white-space: nowrap; }
+    .aside-total {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border);
+      font-size: 1rem; color: var(--cream);
+    }
+    .aside-total .val { color: var(--gold); }
+    .aside-contacts {
+      margin-top: 1.5rem; padding: 1.25rem; border: 1px solid var(--border);
+      background: rgba(0,0,0,0.1);
+    }
+    .aside-contacts p {
+      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: 0.75rem;
+    }
+    .aside-contacts a {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.78rem; color: var(--cream); padding: 0.4rem 0;
+      transition: color 0.2s;
+    }
+    .aside-contacts a:hover { color: var(--gold); }
+
+    /* Back button */
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--text-dim); cursor: pointer; background: none; border: none;
+      padding: 0; margin-bottom: 2rem; transition: color 0.2s;
+    }
+    .back-btn:hover { color: var(--gold); }
+
+    /* Success */
+    .success-block {
+      text-align: center; padding: 5rem 3rem;
+      border: 1px solid var(--border); max-width: 500px; margin: 0 auto;
+    }
+    .success-block__icon { font-size: 2.5rem; color: var(--gold); margin-bottom: 1.5rem; }
+    .success-block h3 {
+      font-family: var(--font-display); font-weight: 400; font-size: 2rem;
+      color: var(--cream); margin-bottom: 0.75rem;
+    }
+    .success-block p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.7; }
+
+    /* Cart badge */
+    .cart-icon-btn {
+      position: relative; display: flex; align-items: center;
+      color: var(--cream); text-decoration: none; padding: 0.5rem;
+      transition: color 0.2s; margin-left: auto; margin-right: 0.5rem;
+    }
+    .cart-icon-btn:hover { color: var(--gold); }
+    .cart-badge {
+      position: absolute; top: 0; right: 0;
+      background: var(--gold); color: #1a1814;
+      width: 18px; height: 18px; border-radius: 50%;
+      font-size: 0.6rem; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+    }
+    @keyframes cartBump {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.4); }
+    }
+    .cart-badge--bump { animation: cartBump 0.3s ease; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <a href="../index.html">
+        <span class="logo-rk">RK</span><span class="logo-perfume">PERFUME</span>
+      </a>
+    </div>
+    <a href="order.html" class="nav__cart" title="Кошик"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="nav__cart-badge">0</span></a>
+    <button class="nav__burger" id="burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="../index.html">Головна</a></li>
+      <li><a href="catalog.html">Каталог</a></li>
+      <li><a href="order.html" class="active">Замовити</a></li>
+      <li><a href="news.html">Новини</a></li>
+      <li><a href="contacts.html">Контакти</a></li>
+    </ul>
+  </nav>
+
+  <section class="page-hero">
+    <span class="page-hero__label">RK Perfume</span>
+    <h1>Оформити<br /><em style="font-style:italic;color:var(--gold-pale)">замовлення</em></h1>
+    <p>Додайте аромати до кошика та заповніть форму доставки</p>
+  </section>
+
+  <section class="order-page">
+    <div class="container">
+
+      <!-- Steps indicator -->
+      <div class="checkout-steps" id="checkoutSteps">
+        <div class="step active" id="indicator1">
+          <div class="step__num">1</div>
+          <span>Кошик</span>
+        </div>
+        <div class="step__sep"></div>
+        <div class="step" id="indicator2">
+          <div class="step__num">2</div>
+          <span>Оформлення</span>
+        </div>
+        <div class="step__sep"></div>
+        <div class="step" id="indicator3">
+          <div class="step__num">3</div>
+          <span>Підтвердження</span>
+        </div>
+      </div>
+
+      <!-- ===== STEP 1: CART ===== -->
+      <div id="stepCart">
+        <div class="order-layout">
+          <div>
+            <div id="cartItems"></div>
+          </div>
+          <!-- Cart sidebar -->
+          <div id="cartSidebar"></div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 2: FORM ===== -->
+      <div id="stepForm">
+        <button class="back-btn" onclick="goToStep(1)">
+          ← Повернутись до кошика
+        </button>
+        <div class="order-layout">
+          <div>
+            <p class="form-section-title">Контактні дані та доставка</p>
+            <div class="order-form" id="orderForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Ім'я та прізвище *</label>
+                  <input type="text" id="name" placeholder="Наприклад: Олена Коваль" required />
+                </div>
+                <div class="form-group">
+                  <label for="phone">Телефон *</label>
+                  <input type="tel" id="phone" placeholder="+38 (0__) ___-__-__" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="delivery">Спосіб отримання *</label>
+                <select id="delivery" required>
+                  <option value="">— Оберіть спосіб —</option>
+                  <option value="nova_poshta">Нова Пошта (по Україні)</option>
+                  <option value="pickup">Самовивіз (Кропивницький)</option>
+                  <option value="courier">Кур'єр (Кропивницький)</option>
+                </select>
+              </div>
+
+              <div class="form-group" id="cityGroup" style="display:none;">
+                <label for="city">Місто та відділення НП</label>
+                <input type="text" id="city" placeholder="Наприклад: Київ, відд. 15" />
+              </div>
+
+              <div class="form-group">
+                <label for="comment">Коментар</label>
+                <textarea id="comment" placeholder="Додаткові побажання або питання..."></textarea>
+              </div>
+
+              <div class="form-group" style="flex-direction:row;align-items:flex-start;gap:0.75rem;">
+                <input type="checkbox" id="agree" style="width:16px;height:16px;margin-top:3px;accent-color:var(--gold);flex-shrink:0;" />
+                <label for="agree" style="font-size:0.72rem;color:var(--text-muted);text-transform:none;letter-spacing:0;cursor:pointer;">
+                  Я погоджуюсь на обробку персональних даних та хочу отримувати новини про акції від RK Perfume
+                </label>
+              </div>
+
+              <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.5rem;">
+                <button class="btn btn--primary" id="submitBtn" onclick="submitOrder()">
+                  Підтвердити замовлення →
+                </button>
+              </div>
+
+              <p style="font-size:0.68rem;color:var(--text-dim);line-height:1.6;">
+                * Після відправки ми зв'яжемось з вами для підтвердження та уточнення деталей оплати
+              </p>
+            </div>
+          </div>
+
+          <!-- Form sidebar: order summary -->
+          <div class="order-aside" id="formSidebar"></div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 3: SUCCESS ===== -->
+      <div id="stepSuccess">
+        <div class="success-block">
+          <div class="success-block__icon">✦</div>
+          <h3>Дякуємо за замовлення!</h3>
+          <p>Ми отримали ваше замовлення та зв'яжемось з вами протягом години у робочий час.<br/>Очікуйте дзвінка або повідомлення.</p>
+          <a href="catalog.html" class="btn btn--outline">Продовжити перегляд каталогу</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo"><span class="logo-rk">RK</span><span class="logo-perfume">PERFUME</span></div>
+          <p>Якісна парфумерія<br />у Кропивницькому</p>
+        </div>
+        <div class="footer__nav">
+          <h4>Навігація</h4>
+          <ul>
+            <li><a href="../index.html">Головна</a></li>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="order.html">Замовити</a></li>
+          </ul>
+        </div>
+        <div class="footer__social">
+          <h4>Соцмережі</h4>
+          <div class="footer__social-links">
+            <a href="http://t.me/rkperfume" target="_blank">✈</a>
+            <a href="https://www.instagram.com/rk.perfume.krop" target="_blank">◎</a>
+            <a href="https://www.tiktok.com/@rk.perfume.krop" target="_blank">♪</a>
+            <a href="https://www.facebook.com/people/Rkperfume-Krop/61577462221644/" target="_blank">f</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 RK Perfume. Всі права захищені.</p>
+        <p>Кропивницький, Україна</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/products.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // ===========================
+    // PAGE STATE
+    // ===========================
+    let currentStep = 1;
+
+    function goToStep(step) {
+      currentStep = step;
+      document.getElementById('stepCart').style.display    = step === 1 ? 'block' : 'none';
+      document.getElementById('stepForm').style.display    = step === 2 ? 'block' : 'none';
+      document.getElementById('stepSuccess').style.display = step === 3 ? 'block' : 'none';
+
+      // Update step indicators
+      [1,2,3].forEach(i => {
+        const el = document.getElementById('indicator' + i);
+        el.classList.remove('active', 'done');
+        if (i < step) el.classList.add('done');
+        else if (i === step) el.classList.add('active');
+      });
+
+      if (step === 1) renderCart();
+      if (step === 2) renderFormSidebar();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ===========================
+    // RENDER CART (STEP 1)
+    // ===========================
+    function renderCart() {
+      const container = document.getElementById('cartItems');
+      const sidebar = document.getElementById('cartSidebar');
+
+      if (cart.length === 0) {
+        container.innerHTML =
+          '<div class="cart-empty">' +
+          '<div class="cart-empty__icon">&#128722;</div>' +
+          '<h3>Кошик порожній</h3>' +
+          '<p>Додайте аромати з каталогу, щоб оформити замовлення</p>' +
+          '<a href="catalog.html" class="btn btn--primary">Перейти до каталогу</a>' +
+          '</div>';
+        sidebar.innerHTML = '';
+        return;
+      }
+
+      let itemsHTML = '<div class="cart-items">';
+      cart.forEach(item => {
+        itemsHTML +=
+          '<div class="cart-item">' +
+          '<div class="cart-item__info">' +
+          '<div class="cart-item__brand">' + item.brand + '</div>' +
+          '<div class="cart-item__name">' + item.name + '</div>' +
+          '<div class="cart-item__volume">' + item.volume + '</div>' +
+          '</div>' +
+          '<div class="cart-item__qty">' +
+          '<button class="qty-btn" onclick="changeQty(\'' + item.id + '\',-1)">−</button>' +
+          '<span class="qty-val">' + item.qty + '</span>' +
+          '<button class="qty-btn" onclick="changeQty(\'' + item.id + '\',1)">+</button>' +
+          '</div>' +
+          '<div class="cart-item__price">' +
+          '<div class="cart-item__price-val">' + formatPrice(item.price * item.qty) + '</div>' +
+          '<button class="cart-item__remove" onclick="removeItem(\'' + item.id + '\')">× видалити</button>' +
+          '</div>' +
+          '</div>';
+      });
+      itemsHTML += '</div>';
+
+      container.innerHTML = itemsHTML;
+
+      // Sidebar
+      const total = getCartTotal();
+      const count = cart.reduce((s,i)=>s+i.qty,0);
+      sidebar.innerHTML =
+        '<div class="cart-summary">' +
+        '<p class="cart-summary__title">Підсумок</p>' +
+        '<div class="cart-summary__row"><span>Товарів</span><span>' + count + ' шт.</span></div>' +
+        '<div class="cart-summary__row cart-summary__row--total"><span>Разом</span><span class="val">' + formatPrice(total) + '</span></div>' +
+        '<p class="cart-summary__note">* Вартість доставки Новою Поштою оплачується окремо при отриманні</p>' +
+        '<button class="btn btn--primary" style="width:100%;" onclick="goToStep(2)">Оформити замовлення →</button>' +
+        '<a href="catalog.html" class="btn btn--ghost" style="width:100%;margin-top:0.75rem;text-align:center;">← Продовжити покупки</a>' +
+        '</div>';
+    }
+
+    function changeQty(id, delta) {
+      updateQty(id, delta);
+      renderCart();
+    }
+
+    function removeItem(id) {
+      removeFromCart(id);
+      renderCart();
+    }
+
+    // ===========================
+    // RENDER FORM SIDEBAR (STEP 2)
+    // ===========================
+    function renderFormSidebar() {
+      const sidebar = document.getElementById('formSidebar');
+      const total = getCartTotal();
+      let html = '<p class="order-aside__title">Ваше замовлення</p>';
+      cart.forEach(item => {
+        html +=
+          '<div class="aside-item">' +
+          '<span class="aside-item__name">' + item.name + '</span>' +
+          '<span class="aside-item__qty">×' + item.qty + '</span>' +
+          '<span class="aside-item__price">' + formatPrice(item.price * item.qty) + '</span>' +
+          '</div>';
+      });
+      html +=
+        '<div class="aside-total"><span>Разом</span><span class="val">' + formatPrice(total) + '</span></div>' +
+        '<div class="aside-contacts">' +
+        '<p>Також можна написати нам:</p>' +
+        '<a href="http://t.me/rkperfum" target="_blank"><span style="color:#2AABEE;">✈</span> @rkperfum</a>' +
+        '<a href="https://www.instagram.com/rk.perfume.krop" target="_blank"><span style="color:#E1306C;">◎</span> @rk.perfume.krop</a>' +
+        '</div>' +
+        '<div style="margin-top:1rem;padding:1rem;border:1px solid var(--border);font-size:0.72rem;color:var(--text-muted);line-height:1.7;">' +
+        '<span style="color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;font-size:0.6rem;">Графік роботи</span><br/>' +
+        'Пн–Сб: 9:00–20:00<br/>Нд: 10:00–18:00' +
+        '</div>';
+      sidebar.innerHTML = html;
+    }
+
+    // ===========================
+    // SUBMIT ORDER
+    // ===========================
+    document.getElementById('delivery').addEventListener('change', function() {
+      document.getElementById('cityGroup').style.display = this.value === 'nova_poshta' ? 'flex' : 'none';
+    });
+
+    async function submitOrder() {
+      const name     = document.getElementById('name').value.trim();
+      const phone    = document.getElementById('phone').value.trim();
+      const delivery = document.getElementById('delivery').value;
+      const city     = document.getElementById('city').value.trim();
+      const comment  = document.getElementById('comment').value.trim();
+
+      if (!name || !phone || !delivery) {
+        showToast('Увага', 'Будь ласка, заповніть усі обовʼязкові поля');
+        return;
+      }
+      if (cart.length === 0) {
+        showToast('Увага', 'Кошик порожній');
+        return;
+      }
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Відправляємо...';
+
+      const items = cart.map(i => i.name + ' (' + i.brand + ') × ' + i.qty).join(', ');
+
+      const TG_BOT = '8712898544:AAGLysJP0M_TAnllYe4Ib_qITapDUYFfC6Q';
+      const TG_CHATS = ['1041579057', '7443699603'];
+      const deliveryMap = { nova_poshta: '🚚 Нова Пошта', pickup: '🏪 Самовивіз (Кропивницький)', courier: '🛵 Кур\'єр (Кропивницький)' };
+      const deliveryLabel = deliveryMap[delivery] || delivery;
+      const cityLine = city ? `\n📍 Місто/відділення: ${city}` : '';
+      const commentLine = comment ? `\n💬 Коментар: ${comment}` : '';
+      const text = `🛒 *НОВЕ ЗАМОВЛЕННЯ — RK Perfume*\n\n👤 Імʼя: ${name}\n📞 Телефон: ${phone}\n🧴 Аромат: ${items}\n📦 Доставка: ${deliveryLabel}${cityLine}${commentLine}\n\n🕐 ${new Date().toLocaleString('uk-UA', { timeZone: 'Europe/Kyiv' })}`;
+
+      try {
+        await Promise.all(TG_CHATS.map(chatId =>
+          fetch(`https://api.telegram.org/bot${TG_BOT}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' }),
+          })
+        ));
+        clearCart();
+        goToStep(3);
+      } catch (e) {
+        showToast('Помилка', 'Немає зʼєднання. Спробуйте ще раз.');
+        btn.disabled = false;
+        btn.textContent = 'Підтвердити замовлення →';
+      }
+    }
+
+    // ===========================
+    // INIT — run after all scripts loaded
+    // ===========================
+    document.addEventListener('DOMContentLoaded', function() {
+      goToStep(1);
+    });
+  </script>
+</body>
+</html>
